@@ -43,10 +43,20 @@ The log table includes a column status that indicates the HTTP status code that 
 - App.py: Provides methods to view each report as well as all reports at once
 - newsdata.sql: Fictonal database which is used to generate these reports
 
+##Technology
+- used to format tables in python interactive
+https://pypi.python.org/pypi/tabulate Tabulate
 
-## Database
-- SQL: PostgreSQL(v9.5.10)
-- Database name: news
+- Databse:
+  - SQL: PostgreSQL(v9.5.10)
+  - 
+
+Python Version:
+
+Virtual Machine: vangres/virtual box
+
+## Database Structure
+Database name: news
 
 ### Table: Articles
 <table border="1">
@@ -155,13 +165,14 @@ The log table includes a column status that indicates the HTTP status code that 
   </tr>
 </table>
 
+### View
+This establishes the referance between article web page URL and resposective article ID.
 
+insert table here
 
-
-
-
-
+here is the code used
 
 ## Future Improvements
 - Right now the reports are only shown in command line, showing these reports in a more visual way in html would be very useful for the end user
 - Hosting the SQL database on a public server would make testing this tool much more accessable
+- save the reports as views and serve them on request from a web server
