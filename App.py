@@ -1,72 +1,86 @@
-
+'''This module is used to connect to and use PostgreSQL database '''
 import psycopg2
 
 DBNAME = "news"
 
-def most_requested_articles():
-    #The SQL query which return the data
+
+def most_viewed_articles():
+    ''' This method return the most articles sorted by the
+    number of views they received'''
+
+    # Query used to retreive the data
     query = '''
         select count(article_id) AS views, articles.title, article_id
         FROM article_to_log JOIN articles ON (id = article_id)
         GROUP BY article_id, articles.title
         ORDER BY views DESC
-        LIMIT 3
     '''
 
-    #Execute the query
+    # Execute the query
     connection = psycopg2.connect(database=DBNAME)
     cursor = connection.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
     connection.close()
-    
-    ## return results       
+
+    # return results
     for i in result:
-        print("{0} -- {1}".format(i[0], i[1]))
-        
+        print("{0} views --- '{1}'".format(i[0], i[1]))
+
 
 def most_read_authors():
-    #The SQL query which return the data
+    '''This method returns list of outhors ordered by the
+    ammount of views their articles received'''
+
+    # The SQL query which return the data
     query = '''
     SELECT authors.name, count(authors.name)
-    FROM 
+    FROM
         (articles JOIN article_to_log ON id = article_to_log.article_id)
         JOIN authors
-        ON author = authors.id    
+        ON author = authors.id
     GROUP BY authors.name
     '''
 
-    #Execute the query
+    # Execute the query
     connection = psycopg2.connect(database=DBNAME)
     cursor = connection.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
     connection.close()
-    
-    ## format and print results       
+
+    # format and print results
     for i in result:
-        print("{0} -- {1}".format(i[1], i[0]))
+        print("{1} --- {0} views".format(i[1], i[0]))
+
 
 def request_errors_by_day():
-    #The SQL query which return the data
+    '''This method lists the days on which the number
+    of HTTP requests with error status exceeded 1'''
+
+    # The SQL query which return the data
     query = '''
-    SELECT  status, 
-        count(status) AS NumberOfErrors,
-        --date_trunc('day', time) AS day
-        log.time::date AS day
-    FROM log
-    WHERE status != '200 OK'
-    GROUP BY status, day
-    ORDER BY NumberOfErrors DESC
+            SELECT
+            day,
+            (errors::decimal /requests::decimal)*100 AS percent_of_errors
+        FROM(
+            SELECT
+                log.time::date AS day,
+                Sum(CASE WHEN log.status ='200 OK' THEN 0 ELSE 1 END) AS errors,
+                count(log) AS requests
+            FROM log
+            GROUP BY day
+            )logStatusByDay
+        WHERE (errors::decimal / requests::decimal * 100) > 1
     '''
 
-    #Execute the query
+    # Execute the query
     connection = psycopg2.connect(database=DBNAME)
     cursor = connection.cursor()
     cursor.execute(query)
     result = cursor.fetchall()
     connection.close()
-    
-    ## format and print results       
+
+    # format and print results
     for i in result:
-        print('Error count: {0} -- day: {1}'.format(i[1], i[2]))
+        print("day: {0} --- Error percent: {1}%".format(i[0], round(i[1], 2)))
