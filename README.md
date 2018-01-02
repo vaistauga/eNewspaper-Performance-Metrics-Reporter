@@ -23,7 +23,9 @@ That is, which authors has the most page views? Presented  as a sorted list with
 #### Example:
 
 `Markoff Chaney --- 84557 views`
+
 `Anonymous Contributor --- 170098 views`
+
 `Rudolf von Treppenwitz --- 423457 views`
 
 ### On which days did more than 1% or more of web requests lead to errors? 
@@ -35,7 +37,7 @@ That is, which authors has the most page views? Presented  as a sorted list with
 ## Files
 - App.py: Provides three methods each of which print a type of report.
 
-##Technology
+## Technology
 - Databse:
   - SQL: PostgreSQL(v9.5.10)
 
