@@ -1,63 +1,49 @@
 # Web Site Performance Metrics Reporter
 
 ## Intro
-The goal of this project is to show my SQL (PostgreSQL) and Python skills applied to generate performance reports for a fictional Web News website.
+The goal of this project is to practise my SQL (PostgreSQL) and Python skills by generaing performance reports for a fictional Web News site.
 
-### Features
-- Clean and modular code - ready to provide more reports
+## To use
+Run one of the following methods from App module.
 
-## Reports
-Run one of the following methods from App.py from python interactive:
-### All reports
-`reportAll()`: Prints all three of the below metrics
-`method`: what are the most popular three
+### Reports
 
 ### What are the most popular three articles of all time?
 Which articles have been accessed the most? Information is presented as a sorted list with the most popular articles at the top.
 
 #### Example:
-    Princess Shellfish Marries Prince Handsome — 1201 views
-    Baltimore Ravens Defeat Rhode Island Shoggoths — 915 views
-    Political Scandal Ends In Political Scandal" — 553 views
+`338647 views --- 'Candidate is jerk, alleges rival'`
+
+`253801 views --- 'Bears love berries, alleges bear'`
 
 
 ### Who are the most popular article authors of all time? 
 That is, which authors has the most page views? Presented  as a sorted list with the most viewed author at the top.
 
 #### Example:
-    Ursula La Multa — 2304 views
-    Rudolf von Treppenwitz — 1985 views
-    Markoff Chaney — 1723 views
-    Anonymous Contributor — 1023 views
 
-### On which days did more than 1% of web requests lead to errors? 
-The log table includes a column status that indicates the HTTP status code that the news site sent to the user's browser. (Refer to this lesson for more information about the idea of HTTP status codes.)
+`Markoff Chaney --- 84557 views`
+`Anonymous Contributor --- 170098 views`
+`Rudolf von Treppenwitz --- 423457 views`
+
+### On which days did more than 1% or more of web requests lead to errors? 
 
 #### Example:
 
-    July 28, 2016 — 3.0% errors
-    July 29, 2016 — 2.5% errors
-    July 30, 2016 — 1.5% errors
+`day: 2016-07-17 --- Error percent: 2.26%`
 
 ## Files
-- App.py: Provides methods to view each report as well as all reports at once
-- newsdata.sql: Fictonal database which is used to generate these reports
+- App.py: Provides three methods each of which print a type of report.
 
 ##Technology
-- used to format tables in python interactive
-https://pypi.python.org/pypi/tabulate Tabulate
-
 - Databse:
   - SQL: PostgreSQL(v9.5.10)
-  - 
 
-Python Version:
+Python Version: 2.7
 
 Virtual Machine: vangres/virtual box
 
 ## Database Structure
-Database name: news
-
 ### Table: Articles
 <table border="1">
   <tr>
@@ -165,12 +151,33 @@ Database name: news
   </tr>
 </table>
 
-### View
+### View: Article to Log
 This establishes the referance between article web page URL and resposective article ID.
 
-insert table here
+<table border="1">
+  <tr>
+    <th align="center">Column</th>
+    <th align="center">Type</th>
+    <th align="center">Modifiers</th>
+  </tr>
+  <tr valign="top">
+    <td align="left">article_id</td>
+    <td align="left">integer</td>
+    <td align="left">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">slug_derived_from_url</td>
+    <td align="left">text</td>
+    <td align="left">&nbsp; </td>
+  </tr>
+  <tr valign="top">
+    <td align="left">log_id</td>
+    <td align="left">integer</td>
+    <td align="left">&nbsp; </td>
+  </tr>
+</table>
 
-here is the code used
+The SQL query used to generate this view may be seen in [article_to_log_view.sql](./Queries/article_to_log_view.sql)
 
 ## Future Improvements
 - Right now the reports are only shown in command line, showing these reports in a more visual way in html would be very useful for the end user
