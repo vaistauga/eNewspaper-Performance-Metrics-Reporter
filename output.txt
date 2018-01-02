@@ -1,0 +1,23 @@
+The most popular articles:
+
+338647 views --- 'Candidate is jerk, alleges rival'
+253801 views --- 'Bears love berries, alleges bear'
+170098 views --- 'Bad things gone, say good people'
+84906 views --- 'Goats eat Google's lawn'
+84810 views --- 'Trouble for troubled troublemakers'
+84557 views --- 'Balloon goons doomed'
+84504 views --- 'There are a lot of bears'
+84383 views --- 'Media obsessed with bears'
+
+
+Them most popular authors:
+
+Markoff Chaney --- 84557 views
+Anonymous Contributor --- 170098 views
+Rudolf von Treppenwitz --- 423457 views
+Ursula La Multa --- 507594 views
+
+
+More than 1% errors:
+
+day: 2016-07-17 --- Error percent: 2.26%
